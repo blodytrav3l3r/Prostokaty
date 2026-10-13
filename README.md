@@ -12,7 +12,7 @@ Profesjonalna gra logiczna z **100 ręcznie zaprojektowanymi poziomami**. Każdy
 6. **Ograniczenia** — krawędzie, narożniki i pola zakazane.
 7. **Dedukcja** — relacje typu „1 jest na lewo od 2”.
 8. **Wieloetapowe** — kilka reguł obowiązuje jednocześnie.
-9. **Układ docelowy** — ćwiczenia precyzyjnego rozmieszczania według współrzędnych celu.
+9. **Jedno rozwiązanie** — sumy pól wierszy i kolumn wraz z relacją lewo–prawo ograniczają układ do jednego poprawnego rozwiązania.
 10. **Mistrzowskie** — kombinacje kilku mechanizmów.
 
 ## Architektura
@@ -49,7 +49,7 @@ npm run check
 ## Roadmap
 
 - większe prostokąty i różne kształty,
-- rozszerzenie solvera o wydajniejsze przycinanie wyszukiwania i weryfikację unikalności łamigłówek opartych wyłącznie na wskazówkach logicznych,
+- dalsze rozszerzenie solvera o wydajniejsze przycinanie wyszukiwania i weryfikację unikalności wszystkich rodzin łamigłówek,
 - edytor poziomów,
 - codzienne wyzwania,
 - pełne E2E/Playwright,
