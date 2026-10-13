@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {buildLevels,validateLevelData,getLevelClues} from '../src/levels.js';
 import {GameEngine} from '../src/engine.js';
 import {countSolutions} from '../src/solver.js';
+import {load,save} from '../src/storage.js';
 
 function overlap(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y}
 
@@ -131,4 +132,45 @@ test('solver audit: logic-first levels are not mislabeled as unique-solution puz
  for(const level of buildLevels().filter(item=>item.family!=='Układ docelowy')){
   assert.equal(countSolutions(level,2),2,`poziom ${level.id} unexpectedly has fewer than two solutions`);
  }
+});
+
+
+function withMockStorage(raw, setItem = () => {}) {
+ const previous=Object.getOwnPropertyDescriptor(globalThis,'localStorage');
+ Object.defineProperty(globalThis,'localStorage',{configurable:true,value:{
+  getItem:()=>raw,
+  setItem
+ }});
+ return () => {
+  if(previous) Object.defineProperty(globalThis,'localStorage',previous);
+  else delete globalThis.localStorage;
+ };
+}
+
+test('storage repairs malformed progress instead of crashing the game',()=>{
+ const restore=withMockStorage(JSON.stringify({
+  currentLevel:999,
+  completed:{'2':{stars:2,moves:5},'101':{stars:3,moves:1},'1':{stars:9,moves:-1}},
+  bestMoves:{'1':4,'101':2,'3':-1},
+  totalMoves:-50,
+  sound:'yes',
+  theme:'unknown'
+ }));
+ try {
+  const state=load();
+  assert.equal(state.currentLevel,1);
+  assert.deepEqual(state.completed,{'2':{stars:2,moves:5}});
+  assert.deepEqual(state.bestMoves,{'1':4});
+  assert.equal(state.totalMoves,0);
+  assert.equal(state.sound,true);
+  assert.equal(state.theme,'dark');
+ } finally { restore(); }
+});
+
+test('storage handles blocked writes without throwing',()=>{
+ const restore=withMockStorage('{}',()=>{throw new Error('quota exceeded')});
+ try {
+  assert.equal(save({currentLevel:1}),false);
+  assert.equal(load().currentLevel,1);
+ } finally { restore(); }
 });
