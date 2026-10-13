@@ -56,7 +56,7 @@ test('silnik blokuje nakładanie i wyjście poza planszę',()=>{
 test('cofanie przywraca stan',()=>{
  const l=buildLevels()[0],e=new GameEngine(l),p=e.pieces[0],x=p.x,y=p.y;
  let dest=null;
- for(let yy=0;yy<8&&!dest;yy++)for(let xx=0;xx<8;xx++)if(e.valid(p,xx,yy)){dest=[xx,yy];break}
+ for(let yy=0;yy<8&&!dest;yy++)for(let xx=0;xx<8;xx++)if((xx!==p.x||yy!==p.y)&&e.valid(p,xx,yy)){dest=[xx,yy];break}
  assert.ok(dest);
  assert.equal(e.move(p.id,...dest),true);
  assert.equal(e.undo(),true);
