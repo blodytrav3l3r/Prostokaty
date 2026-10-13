@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {buildLevels,validateLevelData,getLevelClues} from '../src/levels.js';
 import {GameEngine} from '../src/engine.js';
+import {countSolutions} from '../src/solver.js';
 
 function overlap(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y}
 
@@ -106,4 +107,21 @@ test('każdy poziom pokazuje konkretne wskazówki odpowiadające ograniczeniom',
   if(c.edgeCount!==undefined) assert.ok(clues.some(text=>text.startsWith('Dokładna liczba prostokątów')), `brak liczby krawędzi: ${level.id}`);
   if(c.exact) assert.ok(clues.some(text=>text.startsWith('Współrzędne celu')), `brak współrzędnych celu: ${level.id}`);
  }
+});
+
+
+test('solver formalnie potwierdza dokładnie jeden układ w poziomach docelowych',()=>{
+ for(const level of buildLevels().filter(item=>item.family==='Układ docelowy')){
+  assert.equal(countSolutions(level,2),1,`poziom ${level.id} powinien mieć dokładnie jeden układ docelowy`);
+ }
+});
+
+test('solver odróżnia co najmniej dwa rozwiązania od braku rozwiązania',()=>{
+ const many={width:2,height:2,pieces:[
+  {id:1,x:0,y:0,w:1,h:1,color:'red'},
+  {id:2,x:1,y:1,w:1,h:1,color:'blue'}
+ ],targets:[],constraints:{}};
+ assert.equal(countSolutions(many,2),2);
+ const impossible={...many,constraints:{adjacent:[[1,99]]}};
+ assert.equal(countSolutions(impossible,2),0);
 });
