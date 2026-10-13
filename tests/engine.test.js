@@ -62,3 +62,34 @@ test('cofanie przywraca stan',()=>{
  assert.equal(e.undo(),true);
  assert.equal(p.x,x);assert.equal(p.y,y);
 });
+
+
+test('styk bokiem uwzględnia rzeczywiste wymiary prostokątów',()=>{
+ const level={width:6,height:6,pieces:[
+  {id:1,x:0,y:0,w:2,h:2,color:'red'},
+  {id:2,x:2,y:0,w:1,h:2,color:'blue'},
+  {id:3,x:3,y:3,w:1,h:1,color:'green'},
+  {id:4,x:4,y:4,w:1,h:1,color:'yellow'}
+ ],targets:[],constraints:{adjacent:[[1,2]]}};
+ const e=new GameEngine(level);
+ assert.equal(e.solved(),true);
+ e.pieces[1].x=3;
+ assert.equal(e.solved(),false);
+});
+
+test('silnik odrzuca niecałkowite współrzędne i brakujące elementy reguł',()=>{
+ const level={width:4,height:4,pieces:[
+  {id:1,x:0,y:0,w:1,h:1,color:'red'},
+  {id:2,x:2,y:0,w:1,h:1,color:'blue'}
+ ],targets:[],constraints:{adjacent:[[1,99]]}};
+ const e=new GameEngine(level);
+ assert.equal(e.valid(e.pieces[0],1.5,1),false);
+ assert.equal(e.solved(),false);
+});
+
+test('ruch na to samo pole nie zwiększa licznika ruchów',()=>{
+ const e=new GameEngine(buildLevels()[0]);
+ const p=e.pieces[0];
+ assert.equal(e.move(p.id,p.x,p.y),false);
+ assert.equal(e.moves,0);
+});
