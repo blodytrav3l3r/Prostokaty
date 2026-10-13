@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {buildLevels,validateLevelData} from '../src/levels.js';
+import {buildLevels,validateLevelData,getLevelClues} from '../src/levels.js';
 import {GameEngine} from '../src/engine.js';
 
 function overlap(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y}
@@ -93,4 +93,17 @@ test('ruch na to samo pole nie zwiększa licznika ruchów',()=>{
  const p=e.pieces[0];
  assert.equal(e.move(p.id,p.x,p.y),false);
  assert.equal(e.moves,0);
+});
+
+
+test('każdy poziom pokazuje konkretne wskazówki odpowiadające ograniczeniom',()=>{
+ for(const level of buildLevels()){
+  const clues=getLevelClues(level);
+  assert.ok(clues.length>0,`brak wskazówek dla poziomu ${level.id}`);
+  const c=level.constraints;
+  if(c.rowArea) assert.ok(clues.some(text=>text.startsWith('Suma pól w wierszach')), `brak sum wierszy: ${level.id}`);
+  if(c.forbidden) assert.ok(clues.some(text=>text.startsWith('Pola zakazane')), `brak pól zakazanych: ${level.id}`);
+  if(c.edgeCount!==undefined) assert.ok(clues.some(text=>text.startsWith('Dokładna liczba prostokątów')), `brak liczby krawędzi: ${level.id}`);
+  if(c.exact) assert.ok(clues.some(text=>text.startsWith('Współrzędne celu')), `brak współrzędnych celu: ${level.id}`);
+ }
 });
