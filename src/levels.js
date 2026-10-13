@@ -23,6 +23,9 @@ export function getLevelClues(level) {
   if (c.rowArea?.length) {
     clues.push("Suma pól w wierszach od góry: " + c.rowArea.join(" · ") + ".");
   }
+  if (c.columnArea?.length) {
+    clues.push("Suma pól w kolumnach od lewej: " + c.columnArea.join(" · ") + ".");
+  }
   if (c.symmetry === "rot180") {
     clues.push("Każdy prostokąt musi mieć odbicie względem środka planszy.");
   }
