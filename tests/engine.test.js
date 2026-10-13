@@ -35,8 +35,8 @@ test('rozwiązanie każdego poziomu spełnia jego reguły',()=>{
  }
 });
 
-test('poziomy z jednym rozwiązaniem wymagają dokładnie wskazanego układu',()=>{
- for(const l of buildLevels().filter(x=>x.family==='Jedno rozwiązanie')){
+test('poziomy z układem docelowym wymagają dokładnie wskazanego układu',()=>{
+ for(const l of buildLevels().filter(x=>x.family==='Układ docelowy')){
   const e=new GameEngine(l);
   assert.equal(l.constraints.exact,true);
   e.pieces=l.targets.map(p=>({...p}));
