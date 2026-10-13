@@ -37,6 +37,14 @@ try {
   assert.ok(await page.locator("#board .piece").count() > 0);
   assert.ok(await page.locator("#rules .rule").count() >= 3);
 
+  // Sprawdź widok "Poziomy" osobno — wcześniejszy smoke test badał tylko boczną listę.
+  await page.locator('.nav-btn[data-view="levels"]').click();
+  await page.locator("#levelsView").waitFor({ state: "visible" });
+  assert.equal(await page.locator("#levelsGrid .level-card").count(), 100, "Widok Poziomy powinien zawierać 100 kart");
+  assert.equal(await page.locator("#levelsGrid .level-card .name").count(), 100, "Każda karta powinna mieć nazwę");
+  assert.ok(await page.locator("#levelsGrid .level-card .name").first().innerText().then(t => t.trim().length > 0));
+  await page.locator('.nav-btn[data-view="game"]').click();
+
   // Podstawowe działania interfejsu: wskazówka, reset, motyw i sterowanie klawiaturą.
   await page.locator("#hintBtn").click();
   assert.match(await page.locator("#message").innerText(), /Wskazówka|rozwiązana/);
@@ -63,7 +71,7 @@ try {
   }
   assert.equal(seenTitles.size, 100);
   assert.deepEqual(errors, [], `Błędy przeglądarki: ${errors.join(" | ")}`);
-  console.log("PASS: interfejs uruchomiony; wszystkie 100 poziomów wyrenderowane; podstawowe sterowanie działa; brak błędów przeglądarki.");
+  console.log("PASS: 100 poziomów na liście bocznej i w widoku Poziomy; podstawowe sterowanie działa; brak błędów przeglądarki.");
 } finally {
   await browser.close();
 }
