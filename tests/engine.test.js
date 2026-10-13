@@ -13,8 +13,9 @@ test('zawartość ma dokładnie 100 ręcznie opisanych poziomów',()=>{
 
 test('10 rodzin zagadek jest reprezentowanych po 10 poziomów',()=>{
  const levels=buildLevels();
- const counts=Object.groupBy(levels,l=>l.family);
- assert.deepEqual(Object.values(counts).map(v=>v.length).sort((a,b)=>a-b),Array(10).fill(10));
+ const counts=levels.reduce((map,l)=>map.set(l.family,(map.get(l.family)||0)+1),new Map());
+ assert.equal(counts.size,10);
+ assert.deepEqual([...counts.values()].sort((a,b)=>a-b),Array(10).fill(10));
 });
 
 test('każdy poziom ma poprawną planszę, reguły, cele i bezkolizyjne rozwiązanie',()=>{
