@@ -12,7 +12,7 @@ Profesjonalna gra logiczna z **100 ręcznie zaprojektowanymi poziomami**. Każdy
 6. **Ograniczenia** — krawędzie, narożniki i pola zakazane.
 7. **Dedukcja** — relacje typu „1 jest na lewo od 2”.
 8. **Wieloetapowe** — kilka reguł obowiązuje jednocześnie.
-9. **Jedno rozwiązanie** — poziomy z dokładnie określonym układem.
+9. **Układ docelowy** — ćwiczenia precyzyjnego rozmieszczania według współrzędnych celu.
 10. **Mistrzowskie** — kombinacje kilku mechanizmów.
 
 ## Architektura
@@ -34,7 +34,7 @@ Poziom składa się z planszy, czterech elementów, celu, zestawu reguł oraz st
 
 ## Walidacja
 
-Testy sprawdzają 100 poziomów, unikalność nazw, kompletność rodzin, brak kolizji rozwiązań, zgodność rozwiązań z regułami, poziomy z jednym rozwiązaniem, kolizje oraz cofanie.
+Testy sprawdzają 100 poziomów, unikalność nazw, kompletność rodzin, geometrię i brak kolizji, zgodność rozwiązań z regułami, wskazówki dla ograniczeń, ćwiczenia z układem docelowym oraz cofanie.
 
 Uruchomienie:
 
