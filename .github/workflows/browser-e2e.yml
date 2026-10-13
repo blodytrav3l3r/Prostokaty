@@ -1,0 +1,23 @@
+name: Browser E2E
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  browser-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install browser test runner
+        run: npm install --no-save playwright
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Start local game server
+        run: python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/prostokaty-server.log 2>&1 &
+      - name: Test game UI and all 100 levels
+        run: node tests/browser-smoke.mjs
