@@ -1,1 +1,14 @@
-{"name":"prostokaty","version":"1.0.0","private":true,"description":"Prostokąty — logiczna układanka z 100 poziomami","scripts":{"test":"node --test","check":"node --check src/engine.js && node --check src/levels.js && node --check src/main.js && node --check src/storage.js && node --check src/audio.js && node --check src/ui.js"},"engines":{"node":">=20"},"type":"module"}
+{
+  "name": "prostokaty",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Prostokąty — logiczna układanka z 100 poziomami",
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check src/engine.js && node --check src/levels.js && node --check src/solver.js && node --check src/main.js && node --check src/storage.js && node --check src/audio.js && node --check src/ui.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "type": "module"
+}
