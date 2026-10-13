@@ -125,3 +125,10 @@ test('solver odróżnia co najmniej dwa rozwiązania od braku rozwiązania',()=>
  const impossible={...many,constraints:{adjacent:[[1,99]]}};
  assert.equal(countSolutions(impossible,2),0);
 });
+
+
+test('solver audit: logic-first levels are not mislabeled as unique-solution puzzles',()=>{
+ for(const level of buildLevels().filter(item=>item.family!=='Układ docelowy')){
+  assert.equal(countSolutions(level,2),2,`poziom ${level.id} unexpectedly has fewer than two solutions`);
+ }
+});
