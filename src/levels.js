@@ -1,7 +1,7 @@
 const RAW_DESIGNS=[[[[0,0],[1,0],[6,6],[6,7]],[[0,1],[0,2],[7,5],[7,6]],[[1,0],[2,0],[5,7],[6,7]],[[0,6],[1,6],[6,1],[7,1]],[[2,0],[2,1],[5,6],[5,7]],[[0,3],[1,3],[6,4],[7,4]],[[1,1],[2,1],[5,6],[6,6]],[[0,5],[1,5],[6,2],[7,2]],[[2,2],[3,2],[4,5],[5,5]],[[0,0],[0,1],[7,6],[7,7]]],[[[0,0],[1,0],[0,1],[1,1]],[[2,0],[3,0],[2,1],[3,1]],[[4,0],[5,0],[4,1],[5,1]],[[6,0],[7,0],[6,1],[7,1]],[[0,6],[1,6],[0,7],[1,7]],[[2,6],[3,6],[2,7],[3,7]],[[4,6],[5,6],[4,7],[5,7]],[[6,6],[7,6],[6,7],[7,7]],[[1,1],[6,1],[1,6],[6,6]],[[2,2],[5,2],[2,5],[5,5]]],[[[0,0],[2,0],[4,0],[6,0]],[[0,1],[2,1],[4,1],[6,1]],[[0,2],[2,2],[4,2],[6,2]],[[0,3],[2,3],[4,3],[6,3]],[[0,4],[2,4],[4,4],[6,4]],[[0,5],[2,5],[4,5],[6,5]],[[0,6],[2,6],[4,6],[6,6]],[[0,7],[2,7],[4,7],[6,7]],[[0,0],[0,2],[0,4],[0,6]],[[1,0],[3,0],[5,0],[7,0]]],[[[0,0],[7,0],[0,7],[7,7]],[[1,0],[6,0],[1,7],[6,7]],[[0,1],[7,1],[0,6],[7,6]],[[2,0],[5,0],[2,7],[5,7]],[[0,2],[7,2],[0,5],[7,5]],[[3,0],[4,0],[3,7],[4,7]],[[1,1],[6,1],[1,6],[6,6]],[[2,2],[5,2],[2,5],[5,5]],[[3,1],[4,1],[3,6],[4,6]],[[1,3],[6,3],[1,4],[6,4]]],[[[0,0],[1,0],[2,0],[3,0]],[[0,1],[0,2],[0,3],[0,4]],[[4,0],[5,0],[6,0],[7,0]],[[7,1],[7,2],[7,3],[7,4]],[[1,7],[2,7],[3,7],[4,7]],[[4,6],[4,5],[4,4],[4,3]],[[0,6],[1,6],[2,6],[3,6]],[[6,7],[6,6],[6,5],[6,4]],[[1,1],[2,1],[3,1],[4,1]],[[3,6],[3,5],[3,4],[3,3]]],[[[0,0],[7,0],[0,7],[7,7]],[[0,2],[7,2],[0,5],[7,5]],[[1,0],[6,0],[1,7],[6,7]],[[2,0],[5,0],[2,7],[5,7]],[[0,1],[7,1],[0,6],[7,6]],[[1,1],[6,1],[1,6],[6,6]],[[0,3],[7,3],[0,4],[7,4]],[[3,0],[4,0],[3,7],[4,7]],[[2,1],[5,1],[2,6],[5,6]],[[1,2],[6,2],[1,5],[6,5]]],[[[1,1],[6,1],[1,6],[6,6]],[[2,1],[5,1],[2,6],[5,6]],[[1,2],[6,2],[1,5],[6,5]],[[2,2],[5,2],[2,5],[5,5]],[[0,1],[7,1],[0,6],[7,6]],[[1,0],[6,0],[1,7],[6,7]],[[2,0],[5,0],[2,7],[5,7]],[[0,2],[7,2],[0,5],[7,5]],[[3,0],[4,0],[3,7],[4,7]],[[3,1],[4,1],[3,6],[4,6]]],[[[0,0],[1,0],[6,7],[7,7]],[[0,7],[1,7],[6,0],[7,0]],[[0,2],[1,2],[6,5],[7,5]],[[2,0],[2,1],[5,6],[5,7]],[[0,3],[0,4],[7,3],[7,4]],[[1,1],[2,1],[5,6],[6,6]],[[1,2],[2,2],[5,5],[6,5]],[[0,5],[1,5],[6,2],[7,2]],[[2,3],[3,3],[4,4],[5,4]],[[2,4],[3,4],[4,3],[5,3]]],[[[0,0],[7,0],[0,7],[7,7]],[[1,0],[6,0],[1,7],[6,7]],[[0,1],[7,1],[0,6],[7,6]],[[2,0],[5,0],[2,7],[5,7]],[[0,2],[7,2],[0,5],[7,5]],[[3,0],[4,0],[3,7],[4,7]],[[1,1],[6,1],[1,6],[6,6]],[[2,1],[5,1],[2,6],[5,6]],[[1,2],[6,2],[1,5],[6,5]],[[2,2],[5,2],[2,5],[5,5]]],[[[0,0],[1,0],[0,1],[7,7]],[[0,7],[1,7],[6,7],[7,7]],[[0,0],[7,0],[6,0],[7,1]],[[0,6],[0,7],[7,6],[7,7]],[[1,1],[2,1],[5,6],[6,6]],[[1,6],[2,6],[5,1],[6,1]],[[2,2],[3,2],[4,5],[5,5]],[[2,5],[3,5],[4,2],[5,2]],[[3,0],[4,0],[3,7],[4,7]],[[0,3],[0,4],[7,3],[7,4]]]];
 const TITLES=[["Pierwsze spotkanie","Most","Dwa ogniwa","Równoległe pary","Zderzenie","Przeciwległe ręce","Podwójny styk","Krawędziowe ogniwa","Wąskie przejście","Cztery kroki"],["Szachownica","Dwa odcienie","Kontrast","Kolorowy narożnik","Kolorowa rama","Naprzemienność","Trudny kontrast","Ostatnia para","Krzyż barw","Barwne centrum"],["Rząd zerowy","Drugi rząd","Równe pola","Cztery miary","Suma na krawędzi","Pola parzyste","Podział planszy","Ósmy rząd","Pionowa suma","Kolumnowy bilans"],["Lustro","Odbicie","Dwie osie","Skrajne pary","Symetryczna rama","Oś środka","Cztery odbicia","Kwadrat symetrii","Wąska oś","Podwójne skrzydła"],["Start","W dół","Przez górę","Prawa ściana","Powrót","Pionowy marsz","Dolny korytarz","Schodzenie","Wąski korytarz","Środek ścieżki"],["Cztery rogi","Dwie krawędzie","Skrajne punkty","Górna granica","Dolna granica","Bezpieczny pas","Podwójna krawędź","Oś planszy","Zakaz centrum","Cztery strefy"],["Pierwsza wskazówka","Ukryta para","Lewy trop","Cztery znaki","Dalszy trop","Krawędziowa dedukcja","Trzy przesłanki","Fałszywy ślad","Ostatnia wskazówka","Pełna dedukcja"],["Dwa warunki","Połącz reguły","Podwójny trop","Krawędź i styk","Kolor i suma","Symetria i styk","Trzy kroki","Zakaz i para","Ścieżka i kolor","Finał etapowy"],["Jedyny układ","Nie ma drugiego","Jedno miejsce","Dokładny wzór","Bez alternatywy","Cztery decyzje","Wąskie rozwiązanie","Ostatnia możliwość","Kropka nad i","Jedno rozwiązanie"],["Mistrz rogów","Mistrz krawędzi","Mistrz kolorów","Mistrz ograniczeń","Mistrz symetrii","Mistrz dedukcji","Mistrz ścieżki","Mistrz kombinacji","Mistrz finału","Korona prostokątów"]];
 const FAMILIES=["Sąsiedztwo","Kolory","Suma pól","Symetria","Ścieżki","Ograniczenia","Dedukcja","Wieloetapowe","Jedno rozwiązanie","Mistrzowskie"];
-const RULES=[["Połącz pary 1–2 oraz 3–4.","Elementy muszą stykać się bokiem — narożnik nie wystarcza."],["Sąsiadujące prostokąty muszą mieć różne kolory.","Kolor jest częścią logicznej wskazówki."],["Każdy wiersz ma określoną sumę zajętej powierzchni.","Liczy się całe pole prostokątów, nie tylko ich liczba."],["Układ musi być symetryczny względem środka planszy.","Każdy element potrzebuje swojego odbicia."],["Elementy 1–4 tworzą ciągłą ścieżkę.","Każdy kolejny element musi stykać się bokiem z poprzednim."],["Środkowy kwadrat 2×2 jest polem zakazanym.","Liczba elementów na krawędzi jest częścią zagadki."],["Element 1 znajduje się na lewo od 2, a 3 na lewo od 4.","Dedukuj położenie z relacji, a nie z koloru."],["Spełnij jednocześnie zasadę sąsiedztwa i kolorów.","Jedna reguła nie wystarczy do rozwiązania."],["Istnieje dokładnie jeden poprawny układ.","Każde położenie musi odpowiadać wskazówkom poziomu."],["Połącz sąsiedztwo, kolory i ograniczenie krawędzi.","Wszystkie warunki muszą być spełnione jednocześnie."]];
+const RULES=[["Połącz pary 1–2 oraz 3–4.","Elementy muszą stykać się bokiem — narożnik nie wystarcza."],["Sąsiadujące prostokąty muszą mieć różne kolory.","Kolor jest częścią logicznej wskazówki."],["Każdy wiersz ma określoną sumę zajętej powierzchni.","Liczy się całe pole prostokątów, nie tylko ich liczba."],["Układ musi być symetryczny względem środka planszy.","Każdy element potrzebuje swojego odbicia."],["Elementy 1–4 tworzą ciągłą ścieżkę.","Każdy kolejny element musi stykać się bokiem z poprzednim."],["Środkowy kwadrat 2×2 jest polem zakazanym.","Liczba elementów na krawędzi jest częścią zagadki."],["Element 1 znajduje się na lewo od 2, a 3 na lewo od 4.","Dedukuj położenie z relacji, a nie z koloru."],["Połącz pary 1–2 oraz 3–4, a sąsiadujące elementy ustaw w różnych kolorach.","Oba warunki obowiązują jednocześnie."],["Istnieje dokładnie jeden poprawny układ.","Każde położenie musi odpowiadać wskazówkom poziomu."],["Połącz sąsiedztwo, kolory i ograniczenie krawędzi.","Wszystkie warunki muszą być spełnione jednocześnie."]];
 const PALETTE={c0:"#3198ff",c1:"#31d68b",c2:"#ffb52e",c3:"#a75cff"};
 function overlap(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y}
 function scramble(pieces,seed){const out=[];let cursor=(seed*7)%64;for(const p of pieces){let placed=null;for(let step=0;step<64;step++){const cell=(cursor+step)%64,x=cell%8,y=Math.floor(cell/8),q={...p,x,y};if(x+p.w<=8&&y+p.h<=8&&!out.some(v=>overlap(q,v))){placed=q;cursor=(cell+3)%64;break}}if(!placed)throw new Error("Nie można wymieszać poziomu "+seed);out.push(placed)}return out}
@@ -9,3 +9,37 @@ function constraintsFor(f,i){const pos=RAW_DESIGNS[f][i];if(f===0)return {adjace
 export const LEVELS=RAW_DESIGNS.flatMap((group,f)=>group.map((pos,i)=>{const shaped=pos.map(([x,y],j)=>({id:j+1,x,y,w:f===2&&i!==9?2:1,h:1,color:PALETTE["c"+((f===1||f===7||f===9)?(x+y)%2:j%4)]}));const targets=shaped.map(p=>({...p}));return {id:f*10+i+1,title:TITLES[f][i],family:FAMILIES[f],difficulty:f<2?"ŁATWY":f<5?"ŚREDNI":f<8?"TRUDNY":"MISTRZOWSKI",width:8,height:8,pieces:scramble(shaped,f*10+i+1),targets,rules:RULES[f],constraints:constraintsFor(f,i),par:f>=8?10:8,hint:RULES[f][0]}}));
 export function buildLevels(){return JSON.parse(JSON.stringify(LEVELS))}
 export function validateLevelData(l){return !!l&&l.width===8&&l.height===8&&l.pieces.length===4&&l.targets.length===4}
+
+/** Zwraca konkretne wskazówki wynikające z ograniczeń danego poziomu. */
+export function getLevelClues(level) {
+  const c = level.constraints || {};
+  const clues = [];
+  if (c.adjacent?.length) {
+    clues.push("Pary stykające się bokiem: " + c.adjacent.map(([a, b]) => a + "–" + b).join(", ") + ".");
+  }
+  if (c.path?.length) {
+    clues.push("Kolejność ścieżki: " + c.path.join(" → ") + ".");
+  }
+  if (c.rowArea?.length) {
+    clues.push("Suma pól w wierszach od góry: " + c.rowArea.join(" · ") + ".");
+  }
+  if (c.symmetry === "rot180") {
+    clues.push("Każdy prostokąt musi mieć odbicie względem środka planszy.");
+  }
+  if (c.forbidden?.length) {
+    clues.push("Pola zakazane (kolumna, wiersz): " + c.forbidden.map(([x, y]) => "(" + (x + 1) + ", " + (y + 1) + ")").join(", ") + ".");
+  }
+  if (Number.isInteger(c.edgeCount)) {
+    clues.push("Dokładna liczba prostokątów dotykających krawędzi: " + c.edgeCount + ".");
+  }
+  if (c.leftOf?.length) {
+    clues.push("Relacje lewo–prawo: " + c.leftOf.map(([a, b]) => a + " jest na lewo od " + b).join("; ") + ".");
+  }
+  if (c.colorAdjacentDifferent) {
+    clues.push("Każde dwa prostokąty stykające się bokiem muszą mieć różne kolory.");
+  }
+  if (c.exact) {
+    clues.push("Współrzędne celu (kolumna, wiersz): " + level.targets.map(p => p.id + " → (" + (p.x + 1) + ", " + (p.y + 1) + ")").join("; ") + ".");
+  }
+  return clues;
+}
