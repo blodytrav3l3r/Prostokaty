@@ -37,6 +37,8 @@ Poziom składa się z planszy, czterech elementów, celu, zestawu reguł oraz st
 
 Testy sprawdzają 100 poziomów, unikalność nazw, kompletność rodzin, geometrię i brak kolizji, zgodność rozwiązań z regułami, widoczne wskazówki, cofanie oraz solver z limitem liczenia rozwiązań. Solver zwraca liczbę rozwiązań do zadanego limitu; wynik równy limitowi oznacza „co najmniej tyle”.
 
+Sterowanie: przeciągaj elementy myszą lub dotykiem. Możesz też przechodzić między prostokątami klawiszem Tab i przesuwać zaznaczony element strzałkami. Wskazówki regułowe oraz pola zakazane są wyświetlane w panelu poziomu.
+
 Uruchomienie:
 
 ```bash
