@@ -21,6 +21,7 @@ Profesjonalna gra logiczna z **100 ręcznie zaprojektowanymi poziomami**. Każdy
 src/
 ├── levels.js       # content pack 100 poziomów + reguły
 ├── engine.js       # niezależny silnik i walidacja reguł
+├── solver.js       # ograniczone liczenie rozwiązań
 ├── main.js         # UI, sterowanie i renderowanie
 ├── storage.js      # zapis postępu
 ├── audio.js        # Web Audio API
@@ -34,7 +35,7 @@ Poziom składa się z planszy, czterech elementów, celu, zestawu reguł oraz st
 
 ## Walidacja
 
-Testy sprawdzają 100 poziomów, unikalność nazw, kompletność rodzin, geometrię i brak kolizji, zgodność rozwiązań z regułami, wskazówki dla ograniczeń, ćwiczenia z układem docelowym oraz cofanie.
+Testy sprawdzają 100 poziomów, unikalność nazw, kompletność rodzin, geometrię i brak kolizji, zgodność rozwiązań z regułami, widoczne wskazówki, cofanie oraz solver z limitem liczenia rozwiązań. Solver zwraca liczbę rozwiązań do zadanego limitu; wynik równy limitowi oznacza „co najmniej tyle”.
 
 Uruchomienie:
 
@@ -46,7 +47,7 @@ npm run check
 ## Roadmap
 
 - większe prostokąty i różne kształty,
-- solver i formalna weryfikacja liczby rozwiązań,
+- rozszerzenie solvera o wydajniejsze przycinanie wyszukiwania i weryfikację unikalności łamigłówek opartych wyłącznie na wskazówkach logicznych,
 - edytor poziomów,
 - codzienne wyzwania,
 - pełne E2E/Playwright,
