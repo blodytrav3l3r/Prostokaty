@@ -16,8 +16,11 @@ export function countSolutions(level, limit = 2) {
   }
   const source = level.pieces || [];
   const targets = level.targets || [];
+  const constraints = level.constraints || {};
   if (!Number.isInteger(level.width) || !Number.isInteger(level.height) ||
       level.width < 1 || level.height < 1 || source.length === 0) return 0;
+  if (constraints.rowArea && constraints.rowArea.length !== level.height) return 0;
+  if (constraints.columnArea && constraints.columnArea.length !== level.width) return 0;
 
   const targetById = new Map(targets.map(piece => [piece.id, piece]));
   const candidates = source.map(piece => {
@@ -42,6 +45,8 @@ export function countSolutions(level, limit = 2) {
   const order = source.map((piece, index) => index)
     .sort((a, b) => candidates[a].length - candidates[b].length);
   const placed = [];
+  const rowSums = Array(level.height).fill(0);
+  const columnSums = Array(level.width).fill(0);
   let count = 0;
   const engine = new GameEngine(level);
 
@@ -56,9 +61,31 @@ export function countSolutions(level, limit = 2) {
     const index = order[depth];
     for (const candidate of candidates[index]) {
       if (placed.some(other => overlaps(candidate, other))) continue;
+
+      let feasible = true;
+      for (let y = candidate.y; y < candidate.y + candidate.h; y++) {
+        if (constraints.rowArea && rowSums[y] + candidate.w > constraints.rowArea[y]) {
+          feasible = false;
+          break;
+        }
+      }
+      if (!feasible) continue;
+      for (let x = candidate.x; x < candidate.x + candidate.w; x++) {
+        if (constraints.columnArea &&
+            columnSums[x] + candidate.h > constraints.columnArea[x]) {
+          feasible = false;
+          break;
+        }
+      }
+      if (!feasible) continue;
+
+      for (let y = candidate.y; y < candidate.y + candidate.h; y++) rowSums[y] += candidate.w;
+      for (let x = candidate.x; x < candidate.x + candidate.w; x++) columnSums[x] += candidate.h;
       placed.push(candidate);
       search(depth + 1);
       placed.pop();
+      for (let y = candidate.y; y < candidate.y + candidate.h; y++) rowSums[y] -= candidate.w;
+      for (let x = candidate.x; x < candidate.x + candidate.w; x++) columnSums[x] -= candidate.h;
       if (count >= limit) return;
     }
   }
