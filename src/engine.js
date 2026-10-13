@@ -142,6 +142,15 @@ export class GameEngine {
       if (sums.some((value, index) => value !== constraints.rowArea[index])) return false;
     }
 
+    if (constraints.columnArea) {
+      if (constraints.columnArea.length !== level.width) return false;
+      const sums = Array(level.width).fill(0);
+      this.pieces.forEach(piece => {
+        for (let x = piece.x; x < piece.x + piece.w; x++) sums[x] += piece.h;
+      });
+      if (sums.some((value, index) => value !== constraints.columnArea[index])) return false;
+    }
+
     if (constraints.colorAdjacentDifferent) {
       for (let i = 0; i < this.pieces.length; i++) {
         for (let j = i + 1; j < this.pieces.length; j++) {

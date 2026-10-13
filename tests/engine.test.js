@@ -37,14 +37,16 @@ test('rozwiązanie każdego poziomu spełnia jego reguły',()=>{
  }
 });
 
-test('poziomy z układem docelowym wymagają dokładnie wskazanego układu',()=>{
- for(const l of buildLevels().filter(x=>x.family==='Układ docelowy')){
+test('poziomy z jednym rozwiązaniem używają sum wierszy, kolumn i kolejności',()=>{
+ for(const l of buildLevels().filter(x=>x.family==='Jedno rozwiązanie')){
   const e=new GameEngine(l);
-  assert.equal(l.constraints.exact,true);
+  assert.equal(l.constraints.exact,undefined);
+  assert.ok(Array.isArray(l.constraints.rowArea));
+  assert.ok(Array.isArray(l.constraints.columnArea));
+  assert.deepEqual(l.constraints.leftOf,[[1,2],[2,3],[3,4]]);
   e.pieces=l.targets.map(p=>({...p}));
   assert.equal(e.solved(),true);
-  e.pieces[0].x=(e.pieces[0].x+1)%8;
-  assert.equal(e.solved(),false);
+  assert.equal(countSolutions(l,2),1,`poziom ${l.id} powinien mieć dokładnie jedno rozwiązanie`);
  }
 });
 
@@ -104,6 +106,7 @@ test('każdy poziom pokazuje konkretne wskazówki odpowiadające ograniczeniom',
   assert.ok(clues.length>0,`brak wskazówek dla poziomu ${level.id}`);
   const c=level.constraints;
   if(c.rowArea) assert.ok(clues.some(text=>text.startsWith('Suma pól w wierszach')), `brak sum wierszy: ${level.id}`);
+  if(c.columnArea) assert.ok(clues.some(text=>text.startsWith('Suma pól w kolumnach')), `brak sum kolumn: ${level.id}`);
   if(c.forbidden) assert.ok(clues.some(text=>text.startsWith('Pola zakazane')), `brak pól zakazanych: ${level.id}`);
   if(c.edgeCount!==undefined) assert.ok(clues.some(text=>text.startsWith('Dokładna liczba prostokątów')), `brak liczby krawędzi: ${level.id}`);
   if(c.exact) assert.ok(clues.some(text=>text.startsWith('Współrzędne celu')), `brak współrzędnych celu: ${level.id}`);
@@ -111,8 +114,8 @@ test('każdy poziom pokazuje konkretne wskazówki odpowiadające ograniczeniom',
 });
 
 
-test('solver formalnie potwierdza dokładnie jeden układ w poziomach docelowych',()=>{
- for(const level of buildLevels().filter(item=>item.family==='Układ docelowy')){
+test('solver formalnie potwierdza dokładnie jeden układ w poziomach logicznych',()=>{
+ for(const level of buildLevels().filter(item=>item.family==='Jedno rozwiązanie')){
   assert.equal(countSolutions(level,2),1,`poziom ${level.id} powinien mieć dokładnie jeden układ docelowy`);
  }
 });
@@ -129,7 +132,7 @@ test('solver odróżnia co najmniej dwa rozwiązania od braku rozwiązania',()=>
 
 
 test('solver audit: logic-first levels are not mislabeled as unique-solution puzzles',()=>{
- for(const level of buildLevels().filter(item=>item.family!=='Układ docelowy')){
+ for(const level of buildLevels().filter(item=>item.family!=='Jedno rozwiązanie')){
   assert.equal(countSolutions(level,2),2,`poziom ${level.id} unexpectedly has fewer than two solutions`);
  }
 });
